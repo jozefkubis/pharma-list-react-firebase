@@ -1,7 +1,16 @@
 import "./Navbar.css"
+import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
-  return <div>Navbar</div>
+  return (
+    <header>
+      <nav>
+      <NavLink to="/">Domov</NavLink>
+      <NavLink to="/onemed">Lieky</NavLink>
+      <NavLink to="/form">Pridaj liek</NavLink>
+      </nav>
+    </header>
+  )
 }
 
 export default Navbar
