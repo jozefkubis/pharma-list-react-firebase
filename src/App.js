@@ -9,7 +9,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Sharedlayout />}>
         <Route index element={<Home />} />
-        <Route path="/onemed" element={<OneMed />} />
+        <Route path="/onemed/:medId" element={<OneMed />} />
         <Route path="/form" element={<Form />} />
       </Route>
     </Routes>
