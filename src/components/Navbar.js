@@ -6,7 +6,6 @@ const Navbar = () => {
     <header>
       <nav>
       <NavLink to="/">Domov</NavLink>
-      <NavLink to="/onemed">Lieky</NavLink>
       <NavLink to="/form">Pridaj liek</NavLink>
       </nav>
     </header>
