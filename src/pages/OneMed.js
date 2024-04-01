@@ -28,28 +28,28 @@ const OneMed = () => {
       {error && <p>{error}</p>}
       <h1>{data.nazov}</h1>
       <div>
-        <h4>Skupina:</h4> {data.skupina}
+        <h4>Skupina:</h4> <p>{data.skupina}</p>
       </div>
       <div>
-        <h4>Indikacie:</h4> {data.indikacie}
+        <h4>Indikacie:</h4> <p>{data.indikacie}</p>
       </div>
       <div>
-        <h4>Sposob podania:</h4> {data.sposobPodania}
+        <h4>Sposob podania:</h4> <p>{data.sposobPodania}</p>
       </div>
       <div>
-        <h4>Davkovanie:</h4> {data.davkovanie}
+        <h4>Davkovanie:</h4> <p>{data.davkovanie}</p>
       </div>
       <div>
-        <h4>Nastup a odoznenie ucinku:</h4> {data.nastupAodoznenieUcinku}
+        <h4>Nastup a odoznenie ucinku:</h4> <p>{data.nastupAodoznenieUcinku}</p>
       </div>
       <div>
-        <h4>Mechanizmus ucinku:</h4> {data.MU}
+        <h4>Mechanizmus ucinku:</h4> <p>{data.MU}</p>
       </div>
       <div>
-        <h4>Neziaduce ucinky:</h4> {data.NU}
+        <h4>Neziaduce ucinky:</h4> <p>{data.NU}</p>
       </div>
       <div>
-        <h4>Kontraindikacie:</h4> {data.KI}
+        <h4>Kontraindikacie:</h4> <p>{data.KI}</p>
       </div>
       <Link to="/">Spat do ampularia</Link>
     </section>
