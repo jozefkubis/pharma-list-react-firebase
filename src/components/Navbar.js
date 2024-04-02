@@ -7,6 +7,7 @@ const Navbar = () => {
       <nav>
       <NavLink to="/">Domov</NavLink>
       <NavLink to="/form">Pridaj liek</NavLink>
+      <NavLink to="/delete">Zmazať liek</NavLink>
       </nav>
     </header>
   )
