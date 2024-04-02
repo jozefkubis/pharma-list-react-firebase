@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 const Home = () => {
   const [data, setData] = useState([])
   const [error, setError] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     let unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
@@ -33,18 +34,52 @@ const Home = () => {
 
   return (
     <section>
-      {error && <p>{error}</p>}
-      {data.map((oneMed) => {
-        const { id, nazov, skupina } = oneMed
+      <form>
+        <input
+          className="searchInput"
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Hladat"
+        />
+      </form>
 
-        return (
-          <div className="medicine" key={id}>
-            <h3>{nazov}</h3>
-            <p>{skupina}</p>
-            <Link to={`/onemed/${id}`}>Detail</Link>
-          </div>
-        )
-      })}
+      {error && <p>{error}</p>}
+      {!searchTerm
+        ? data.map((oneMed) => {
+            const { id, nazov, skupina } = oneMed
+
+            return (
+              <div className="medicine" key={id}>
+                <h3>{nazov}</h3>
+                <p>{skupina}</p>
+                <Link to={`/onemed/${id}`}>Detail</Link>
+              </div>
+            )
+          })
+        : data
+            .filter((oneMed) => {
+              return oneMed.nazov
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+            })
+            .map((filteredMed) => {
+              const { id, nazov, skupina } = filteredMed
+
+              return (
+                <div className="medicine" key={id}>
+                  <h3>{nazov}</h3>
+                  <p>{skupina}</p>
+                  <Link to={`/onemed/${id}`}>Detail</Link>
+                </div>
+              )
+            })}
+      {searchTerm !==
+      data.filter((oneMed) => {
+        return oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+      }) ? (
+        <p>Nenašli sa žiadne výsledky hladania</p>
+      ) : null}
     </section>
   )
 }
