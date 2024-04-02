@@ -34,6 +34,7 @@ const Delete = () => {
 
   const deleteMovie = (id) => {
     projectFirestore.collection("ampularium").doc(id).delete()
+    setSearchTerm("")
   }
 
   return (
