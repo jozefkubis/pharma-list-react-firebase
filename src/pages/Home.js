@@ -36,7 +36,7 @@ const Home = () => {
     <section>
       <form>
         <input
-          className="searchInput"
+          className="search-input"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -78,7 +78,7 @@ const Home = () => {
       data.filter((oneMed) => {
         return oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
       }) ? (
-        <p>Nenašli sa žiadne výsledky hladania</p>
+        <p>Nenašli sa žiadne výsledky</p>
       ) : null}
     </section>
   )
