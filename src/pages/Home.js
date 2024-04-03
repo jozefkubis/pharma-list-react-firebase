@@ -9,32 +9,38 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    let unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
+    const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
       (snapshot) => {
         if (snapshot.empty) {
           setError("No data available")
         } else {
-          let dataArray = []
-          snapshot.forEach((oneMed) => {
-            dataArray.push({
-              id: oneMed.id,
-              ...oneMed.data(),
-            })
-          })
+          const dataArray = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
           setData(dataArray)
         }
       },
       (err) => setError(err.message)
     )
 
-    return () => {
-      unsubscribe()
-    }
+    return unsubscribe
   }, [])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    // Vyhľadávanie sa vykoná tu
+  }
+
+  const filteredData = searchTerm
+    ? data.filter((oneMed) =>
+        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : data
 
   return (
     <section>
-      <form>
+      <form onSubmit={handleSearch}>
         <input
           className="search-input"
           type="text"
@@ -42,44 +48,21 @@ const Home = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Hladat"
         />
+        <button type="submit">Vyhľadať</button>
       </form>
 
       {error && <p>{error}</p>}
-      {!searchTerm
-        ? data.map((oneMed) => {
-            const { id, nazov, skupina } = oneMed
-
-            return (
-              <div className="medicine" key={id}>
-                <h3>{nazov}</h3>
-                <p>{skupina}</p>
-                <Link to={`/onemed/${id}`}>Detail</Link>
-              </div>
-            )
-          })
-        : data
-            .filter((oneMed) => {
-              return oneMed.nazov
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase())
-            })
-            .map((filteredMed) => {
-              const { id, nazov, skupina } = filteredMed
-
-              return (
-                <div className="medicine" key={id}>
-                  <h3>{nazov}</h3>
-                  <p>{skupina}</p>
-                  <Link to={`/onemed/${id}`}>Detail</Link>
-                </div>
-              )
-            })}
-      {searchTerm !==
-      data.filter((oneMed) => {
-        return oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
-      }) ? (
+      {filteredData.length > 0 ? (
+        filteredData.map(({ id, nazov, skupina }) => (
+          <div className="medicine" key={id}>
+            <h3>{nazov}</h3>
+            <p>{skupina}</p>
+            <Link to={`/onemed/${id}`}>Detail</Link>
+          </div>
+        ))
+      ) : (
         <p>Nenašli sa žiadne výsledky</p>
-      ) : null}
+      )}
     </section>
   )
 }
