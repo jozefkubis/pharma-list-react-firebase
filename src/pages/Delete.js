@@ -1,41 +1,43 @@
-import "./Delete.css"
-import { projectFirestore } from "../firebase/config"
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import "./Delete.css";
+import { projectFirestore } from "../firebase/config";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Delete = () => {
-  const [data, setData] = useState([])
-  const [error, setError] = useState("")
-  const [searchTerm, setSearchTerm] = useState("")
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    let unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
+    const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
       (snapshot) => {
         if (snapshot.empty) {
-          setError("No data available")
+          setError("No data available");
         } else {
-          let dataArray = []
-          snapshot.forEach((oneMed) => {
-            dataArray.push({
-              id: oneMed.id,
-              ...oneMed.data(),
-            })
-          })
-          setData(dataArray)
+          const dataArray = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setData(dataArray);
         }
       },
       (err) => setError(err.message)
-    )
+    );
 
-    return () => {
-      unsubscribe()
-    }
-  }, [])
+    return unsubscribe;
+  }, []);
 
-  const deleteMovie = (id) => {
-    projectFirestore.collection("ampularium").doc(id).delete()
-    setSearchTerm("")
-  }
+  const deleteMedicine = (id) => {
+    projectFirestore.collection("ampularium").doc(id).delete();
+    // Aktualizácia dát po zmazaní
+    setData(data.filter((item) => item.id !== id));
+  };
+
+  const filteredData = searchTerm
+    ? data.filter((oneMed) =>
+        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : data;
 
   return (
     <section>
@@ -50,45 +52,22 @@ const Delete = () => {
       </form>
 
       {error && <p>{error}</p>}
-      {!searchTerm
-        ? data.map((oneMed) => {
-            const { id, nazov } = oneMed
-
-            return (
-              <div className="medicine" key={id}>
-                <h4>{nazov}</h4>
-              </div>
-            )
-          })
-        : data
-            .filter((oneMed) => {
-              return oneMed.nazov
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase())
-            })
-            .map((filteredMed) => {
-              const { id, nazov } = filteredMed
-
-              return (
-                <div className="medicine" key={id}>
-                  <h4>{nazov}</h4>
-                  <button type="button" onClick={() => deleteMovie(id)}>
-                    Zmazat
-                  </button>
-                </div>
-              )
-            })}
+      {filteredData.length > 0 ? (
+        filteredData.map(({ id, nazov }) => (
+          <div className="medicine" key={id}>
+            <h4>{nazov}</h4>
+            <button type="button" onClick={() => deleteMedicine(id)}>
+              Zmazat
+            </button>
+          </div>
+        ))
+      ) : (
+        <p>Nenašli sa žiadne výsledky</p>
+      )}
 
       <Link to="/">Spat do ampularia</Link>
-
-      {searchTerm !==
-      data.filter((oneMed) => {
-        return oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
-      }) ? (
-        <p>Nenašli sa žiadne výsledky</p>
-      ) : null}
     </section>
-  )
-}
+  );
+};
 
-export default Delete
+export default Delete;
