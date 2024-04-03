@@ -39,8 +39,9 @@ const Home = () => {
     : data
 
   return (
-    <section>
-      <form onSubmit={handleSearch}>
+    <section className="home-section">
+      <h1>Farmakologia pre RZP posadky</h1>
+      <form onSubmit={handleSearch} className="home-form">
         <input
           className="search-input"
           type="text"
@@ -55,8 +56,11 @@ const Home = () => {
       {filteredData.length > 0 ? (
         filteredData.map(({ id, nazov, skupina }) => (
           <div className="medicine" key={id}>
-            <h3>{nazov}</h3>
-            <p>{skupina}</p>
+            <div className="separator">
+              <h4>{nazov}</h4>
+              <p>{skupina}</p>
+            </div>
+
             <Link to={`/onemed/${id}`}>Detail</Link>
           </div>
         ))

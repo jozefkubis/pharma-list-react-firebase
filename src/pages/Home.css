@@ -1,0 +1,43 @@
+.home-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.home-section h1 {
+    font-style: italic;
+}
+
+.home-form {
+  margin-bottom: 50px;
+}
+
+.medicine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  background-color: rgb(206, 218, 233);
+  border-radius: 10px;
+  margin-top: 2px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.medicine p,
+.medicine h4,
+.medicine a {
+  margin: 0;
+  padding: 2px 15px;
+}
+
+.medicine p {
+    font-size: 12px;
+    color: rgb(73, 73, 73);
+}
+
+.medicine a {
+  text-decoration: none;
+  color: blue;
+}
