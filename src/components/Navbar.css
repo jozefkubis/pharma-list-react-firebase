@@ -1,13 +1,33 @@
 header {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(206, 218, 233);
+  font-weight: bolder;
 }
 
 nav {
+  width: 100vw;
   display: flex;
+  justify-content: space-evenly;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+nav a:hover {
+  color: #546380;
+}
+
+.navbar-btn {
+  outline: none;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #364663;
 }
 
 nav a {
@@ -15,4 +35,5 @@ nav a {
   display: inline-block;
   text-decoration: none;
   color: black;
+  padding: 3px;
 }

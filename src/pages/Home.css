@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 100px;
 }
 
 .home-section h1 {
   font-style: italic;
+  margin-bottom: 50px;
 }
 
 .home-form {
@@ -15,17 +17,18 @@
 
 .search-input {
   width: 300px;
-  height: 30px;
+  height: 40px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border: 1px solid rgb(199, 199, 199);
   padding: 0 10px;
   outline: none;
+  font-size: 18px;
 }
 
 .home-btn {
   width: 50px;
-  height: 30px;
+  height: 40px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border: 1px solid rgb(199, 199, 199);
