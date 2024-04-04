@@ -1,15 +1,18 @@
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  nav {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  nav a {
-    margin-right: 10px;
-    display: inline-block;
-    text-decoration: none;
-    color: black
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin-right: 10px;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+}

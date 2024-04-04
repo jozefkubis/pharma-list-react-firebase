@@ -2,6 +2,7 @@ import "./Home.css"
 import { projectFirestore } from "../firebase/config"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { GoSearch } from "react-icons/go"
 
 const Home = () => {
   const [data, setData] = useState([])
@@ -42,14 +43,16 @@ const Home = () => {
     <section className="home-section">
       <h1>Farmakologia pre RZP posadky</h1>
       <form onSubmit={handleSearch} className="home-form">
+        <button className="home-btn" type="submit">
+          <GoSearch />
+        </button>
         <input
           className="search-input"
-          type="text"
+          type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Hladat"
         />
-        <button type="submit">Vyhľadať</button>
       </form>
 
       {error && <p>{error}</p>}
