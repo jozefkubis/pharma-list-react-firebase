@@ -37,3 +37,13 @@ nav a {
   color: black;
   padding: 3px;
 }
+
+/* .dark-mode {
+  background-color: #364663;
+  color: white;
+} */
+
+.dark-mode a {
+  background-color: #364663;
+  color: white;
+}
