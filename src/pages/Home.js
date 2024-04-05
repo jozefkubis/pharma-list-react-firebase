@@ -3,6 +3,7 @@ import { projectFirestore } from "../firebase/config"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { GoSearch } from "react-icons/go"
+import { MdOutlineDoubleArrow } from "react-icons/md";
 
 const Home = () => {
   const [data, setData] = useState([])
@@ -64,7 +65,7 @@ const Home = () => {
               <p>{skupina}</p>
             </div>
 
-            <Link to={`/onemed/${id}`}>Detail</Link>
+            <Link to={`/onemed/${id}`}><MdOutlineDoubleArrow /></Link>
           </div>
         ))
       ) : (

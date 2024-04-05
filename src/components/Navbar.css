@@ -13,37 +13,34 @@ nav {
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  align-items: center;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
 }
 
 nav a:hover {
   color: #546380;
 }
 
-.navbar-btn {
-  outline: none;
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  background-color: #364663;
+.navbar-div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dark-mode-btn {
+  width: 18px;
+  height: 18px;
 }
 
 nav a {
-  margin-right: 10px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: black;
   padding: 3px;
 }
 
-/* .dark-mode {
-  background-color: #364663;
-  color: white;
-} */
-
-.dark-mode a {
-  background-color: #364663;
-  color: white;
+nav p {
+  margin-left: 5px;
 }
