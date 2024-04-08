@@ -3,11 +3,29 @@
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
+  height: 100vh;
 }
 
-.home-section h1 {
+.home-div {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  top: 60px;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+
+.home-h1 {
   font-style: italic;
   margin-bottom: 50px;
+}
+
+.hidden {
+  display: none;
 }
 
 .home-form {
@@ -36,6 +54,18 @@
   color: rgb(255, 255, 255);
 }
 
+.home-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.data-toggle {
+  margin-top: 100px;
+}
+
 .medicine {
   display: flex;
   align-items: center;
@@ -49,7 +79,6 @@
 }
 
 .medicine p,
-.medicine h4,
 .medicine a {
   margin: 0;
   padding: 2px 15px;

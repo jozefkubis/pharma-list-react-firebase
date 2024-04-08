@@ -1,0 +1,63 @@
+.delete-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.delete-form {
+  margin-bottom: 50px;
+  display: flex;
+}
+
+.delete-search-input {
+  width: 300px;
+  height: 40px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid rgb(199, 199, 199);
+  padding: 0 10px;
+  outline: none;
+  font-size: 18px;
+}
+
+.delete-btn {
+  width: 50px;
+  height: 40px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid rgb(199, 199, 199);
+  background-color: rgb(199, 199, 199);
+  color: rgb(255, 255, 255);
+}
+
+.medicine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  background-color: rgb(206, 218, 233);
+  border-radius: 10px;
+}
+
+.medicine h4,
+.kos,
+.medicine a {
+  margin: 0;
+  padding: 10px 15px;
+}
+
+.kos {
+  cursor: pointer;
+}
+
+.delete-back-link {
+  text-decoration: none;
+  color: black;
+  margin-top: 50px;
+  font-weight: bolder;
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}

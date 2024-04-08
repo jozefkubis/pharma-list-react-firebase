@@ -46,7 +46,7 @@ const Form = () => {
 
   return (
     <section className="form-section">
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} className="form-form">
         <input
           type="text"
           placeholder="Nazov lieku"
