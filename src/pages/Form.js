@@ -1,6 +1,7 @@
 import "./Form.css"
 import { useState } from "react"
 import { projectFirestore } from "../firebase/config"
+import { FaSave } from "react-icons/fa";
 
 const Form = () => {
   const [skupina, setSkupina] = useState("")
@@ -119,7 +120,7 @@ const Form = () => {
           className="textarea"
         />
 
-        <input type="submit" value="Vlozit" />
+        <button className="vlozit">Vlozit <FaSave /></button>
       </form>
     </section>
   )
