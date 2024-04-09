@@ -37,3 +37,14 @@
   background-color: #364663;
   color: white;
 } 
+
+.dark-mode .one-med-section div {
+  background-color: #364663;
+  color: white;
+}
+
+.dark-mode .textarea,
+.dark-mode .input-input {
+  background-color: #364663;
+  color: white;
+}

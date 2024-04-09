@@ -20,6 +20,8 @@
   border: 2px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
+  box-shadow: 0px 0px 10px #ccc;
+
 }
 
 .input-input:focus {
@@ -37,6 +39,7 @@
   background-color: #f8f8f8;
   font-size: 16px;
   resize: none;
+  box-shadow: 0px 0px 10px #ccc;
 }
 
 .textarea:focus {

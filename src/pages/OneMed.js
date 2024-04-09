@@ -24,7 +24,7 @@ const OneMed = () => {
   }, [medId])
 
   return (
-    <section>
+    <section className="one-med-section">
       {error && <p>{error}</p>}
       <h1>{data.nazov}</h1>
       <div>
