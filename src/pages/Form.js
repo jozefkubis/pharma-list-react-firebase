@@ -54,7 +54,6 @@ const Form = () => {
           value={nazov}
           className="input-input"
         />
-        <br />
 
         <input
           type="text"
@@ -63,7 +62,6 @@ const Form = () => {
           value={skupina}
           className="input-input"
         />
-        <br />
 
         <textarea
           type="text"
@@ -72,7 +70,6 @@ const Form = () => {
           value={indikacie}
           className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
@@ -81,25 +78,22 @@ const Form = () => {
           value={sposobPodania}
           className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
           placeholder="Davkovanie"
           onChange={(e) => setDavkovanie(e.target.value)}
           value={davkovanie}
-          className="input-input"
+          className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
           placeholder="Nastup a odoznenie ucinku"
           onChange={(e) => setNastupAodoznenieUcinku(e.target.value)}
           value={nastupAodoznenieUcinku}
-          className="input-input"
+          className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
@@ -108,7 +102,6 @@ const Form = () => {
           value={MU}
           className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
@@ -117,7 +110,6 @@ const Form = () => {
           value={NU}
           className="textarea"
         />
-        <br />
 
         <textarea
           type="text"
@@ -126,7 +118,6 @@ const Form = () => {
           value={KI}
           className="textarea"
         />
-        <br />
 
         <input type="submit" value="Vlozit" />
       </form>
