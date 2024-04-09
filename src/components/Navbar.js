@@ -10,8 +10,6 @@ const Navbar = () => {
   const darkMode = () => {
     const isDarkMode = document.documentElement.classList.toggle("dark-mode")
     const navbar = document.querySelector("nav")
-    const homeDiv = document.querySelector(".home-div")
-    homeDiv.classList.toggle("dark-mode", isDarkMode)
     navbar.classList.toggle("dark-mode", isDarkMode)
     localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled")
   }
