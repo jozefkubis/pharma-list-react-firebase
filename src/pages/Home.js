@@ -11,43 +11,34 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
-    const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
+    return projectFirestore.collection("ampularium").onSnapshot(
       (snapshot) => {
-        if (snapshot.empty) {
-          setError("No data available")
-        } else {
-          const dataArray = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          setData(dataArray)
-        }
+        setError(snapshot.empty ? "No data available" : "")
+        setData(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
       },
       (err) => setError(err.message)
     )
-
-    return unsubscribe
   }, [])
 
-  const searchFixed = () => {
-    if (document.querySelector(".home-h1").classList.toggle("hidden")) {
-      document.querySelector(".home-data").classList.add("data-toggle")
-    } else {
-      document.querySelector(".home-data").classList.remove("data-toggle")
-    }
+  const toggleSearch = () => {
+    document.querySelector(".home-h1").classList.toggle("hidden")
+    document.querySelector(".home-data").classList.toggle("data-toggle")
   }
 
-  const filteredData = searchTerm
-    ? data.filter((oneMed) =>
-        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : data
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value)
+    toggleSearch()
+  }
+
+  const filteredData = data.filter((oneMed) =>
+    oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <section className="home-section">
       <div className="home-div">
         <h1 className="home-h1">Farmakologia pre RZP posadky</h1>
-        <form className="home-form">
+        <form className="home-form" onClick={toggleSearch}>
           <button className="home-btn">
             <GoSearch />
           </button>
@@ -55,16 +46,14 @@ const Home = () => {
             className="search-input"
             type="search"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onClick={searchFixed}
+            onChange={handleSearchChange}
             placeholder="Hladat"
           />
         </form>
       </div>
-
       <div className="home-data">
         {error && <p>{error}</p>}
-        {filteredData.length > 0 ? (
+        {filteredData.length ? (
           filteredData.map(({ id, nazov, skupina }) => (
             <div className="medicine" key={id}>
               <div className="separator">
