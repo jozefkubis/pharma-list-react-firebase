@@ -20,15 +20,22 @@ const Home = () => {
     )
   }, [])
 
-  const toggleSearch = () => {
-    document.querySelector(".home-h1").classList.toggle("hidden")
-    document.querySelector(".home-data").classList.toggle("data-toggle")
+  const addSearch = () => {
+    document.querySelector(".home-h1").classList.add("hidden")
+    document.querySelector(".home-data").classList.add("data-toggle")
   }
+
+  const removeSearch = () => {
+    document.querySelector(".home-h1").classList.remove("hidden")
+    document.querySelector(".home-data").classList.remove("data-toggle")
+  }
+
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value)
-    toggleSearch()
+    addSearch()
   }
+
 
   const filteredData = data.filter((oneMed) =>
     oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
@@ -38,7 +45,7 @@ const Home = () => {
     <section className="home-section">
       <div className="home-div">
         <h1 className="home-h1">Farmakologia pre RZP posadky</h1>
-        <form className="home-form" onClick={toggleSearch}>
+        <form className="home-form" onClick={addSearch}>
           <button className="home-btn">
             <GoSearch />
           </button>
@@ -61,7 +68,7 @@ const Home = () => {
                 <p>{skupina}</p>
               </div>
 
-              <Link to={`/onemed/${id}`}>
+              <Link to={`/onemed/${id}`} onClick={removeSearch}>
                 <MdOutlineDoubleArrow />
               </Link>
             </div>
