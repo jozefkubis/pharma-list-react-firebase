@@ -1,0 +1,46 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(206, 218, 233);
+  font-weight: bolder;
+}
+
+nav {
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+}
+
+nav a:hover {
+  color: #546380;
+}
+
+.navbar-div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dark-mode-btn {
+  width: 18px;
+  height: 18px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  padding: 3px;
+}
+
+nav p {
+  margin-left: 5px;
+}

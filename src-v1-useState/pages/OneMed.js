@@ -1,12 +1,12 @@
 import "./OneMed.css"
 import { useParams, Link } from "react-router-dom"
 import { projectFirestore } from "../firebase/config"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { BiInjection } from "react-icons/bi"
-import { usePharma } from "../contexts/PharmaContext"
 
 const OneMed = () => {
-  const { dispatch, data, error } = usePharma()
+  const [data, setData] = useState({})
+  const [error, setError] = useState("")
 
   const { medId } = useParams()
 
@@ -17,12 +17,12 @@ const OneMed = () => {
       .get()
       .then((doc) => {
         if (!doc.exists) {
-          dispatch({ type: "setError", payload: "Medicine not found" })
+          setError("Medicine not found")
         } else {
-          dispatch({ type: "setData", payload: doc.data() })
+          setData(doc.data())
         }
       })
-  }, [medId, dispatch])
+  }, [medId])
 
   return (
     <section className="one-med-section">

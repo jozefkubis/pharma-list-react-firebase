@@ -1,21 +1,18 @@
 import "./Form.css"
+import { useState } from "react"
 import { projectFirestore } from "../firebase/config"
-import { FaSave } from "react-icons/fa"
-import { usePharma } from "../contexts/PharmaContext"
+import { FaSave } from "react-icons/fa";
 
 const Form = () => {
-  const {
-    skupina,
-    nazov,
-    indikacie,
-    sposobPodania,
-    davkovanie,
-    nastupAodoznenieUcinku,
-    MU,
-    NU,
-    KI,
-    dispatch,
-  } = usePharma()
+  const [skupina, setSkupina] = useState("")
+  const [nazov, setNazov] = useState("")
+  const [indikacie, setIndikacie] = useState("")
+  const [sposobPodania, setSposobPodania] = useState("")
+  const [davkovanie, setDavkovanie] = useState("")
+  const [nastupAodoznenieUcinku, setNastupAodoznenieUcinku] = useState("")
+  const [MU, setMU] = useState("")
+  const [NU, setNU] = useState("")
+  const [KI, setKI] = useState("")
 
   const submitForm = async (e) => {
     e.preventDefault()
@@ -34,15 +31,15 @@ const Form = () => {
 
     try {
       await projectFirestore.collection("ampularium").add(newMedicine)
-      dispatch({ type: "setNazov", payload: "" })
-      dispatch({ type: "setSkupina", payload: "" })
-      dispatch({ type: "setIndikacie", payload: "" })
-      dispatch({ type: "setSposobPodania", payload: "" })
-      dispatch({ type: "setDavkovanie", payload: "" })
-      dispatch({ type: "setNastupAodoznenieUcinku", payload: "" })
-      dispatch({ type: "setMU", payload: "" })
-      dispatch({ type: "setNU", payload: "" })
-      dispatch({ type: "setKI", payload: "" })
+      setNazov("")
+      setSkupina("")
+      setIndikacie("")
+      setSposobPodania("")
+      setDavkovanie("")
+      setNastupAodoznenieUcinku("")
+      setMU("")
+      setNU("")
+      setKI("")
     } catch (error) {
       console.log(error)
     }
@@ -54,9 +51,7 @@ const Form = () => {
         <input
           type="text"
           placeholder="Nazov lieku"
-          onChange={(e) =>
-            dispatch({ type: "setNazov", payload: e.target.value })
-          }
+          onChange={(e) => setNazov(e.target.value)}
           value={nazov}
           className="input-input"
         />
@@ -64,9 +59,7 @@ const Form = () => {
         <input
           type="text"
           placeholder="Skupina liekov"
-          onChange={(e) =>
-            dispatch({ type: "setSkupina", payload: e.target.value })
-          }
+          onChange={(e) => setSkupina(e.target.value)}
           value={skupina}
           className="input-input"
         />
@@ -74,9 +67,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Indikacie"
-          onChange={(e) =>
-            dispatch({ type: "setIndikacie", payload: e.target.value })
-          }
+          onChange={(e) => setIndikacie(e.target.value)}
           value={indikacie}
           className="textarea"
         />
@@ -84,9 +75,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Sposob podania"
-          onChange={(e) =>
-            dispatch({ type: "setSposobPodania", payload: e.target.value })
-          }
+          onChange={(e) => setSposobPodania(e.target.value)}
           value={sposobPodania}
           className="textarea"
         />
@@ -94,9 +83,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Davkovanie"
-          onChange={(e) =>
-            dispatch({ type: "setDavkovanie", payload: e.target.value })
-          }
+          onChange={(e) => setDavkovanie(e.target.value)}
           value={davkovanie}
           className="textarea"
         />
@@ -104,12 +91,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Nastup a odoznenie ucinku"
-          onChange={(e) =>
-            dispatch({
-              type: "setNastupAodoznenieUcinku",
-              payload: e.target.value,
-            })
-          }
+          onChange={(e) => setNastupAodoznenieUcinku(e.target.value)}
           value={nastupAodoznenieUcinku}
           className="textarea"
         />
@@ -117,7 +99,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Mechanizmus ucinku"
-          onChange={(e) => dispatch({ type: "setMU", payload: e.target.value })}
+          onChange={(e) => setMU(e.target.value)}
           value={MU}
           className="textarea"
         />
@@ -125,7 +107,7 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Neziaduce ucinky"
-          onChange={(e) => dispatch({ type: "setNU", payload: e.target.value })}
+          onChange={(e) => setNU(e.target.value)}
           value={NU}
           className="textarea"
         />
@@ -133,14 +115,12 @@ const Form = () => {
         <textarea
           type="text"
           placeholder="Kontraindikacie"
-          onChange={(e) => dispatch({ type: "setKI", payload: e.target.value })}
+          onChange={(e) => setKI(e.target.value)}
           value={KI}
           className="textarea"
         />
 
-        <button className="vlozit">
-          Vlozit <FaSave />
-        </button>
+        <button className="vlozit">Vlozit <FaSave /></button>
       </form>
     </section>
   )

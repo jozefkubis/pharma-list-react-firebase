@@ -1,41 +1,39 @@
 import "./Delete.css"
 import { projectFirestore } from "../firebase/config"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { GoSearch } from "react-icons/go"
 import { RiDeleteBin2Fill } from "react-icons/ri"
-import { BiInjection } from "react-icons/bi"
-import { usePharma } from "../contexts/PharmaContext"
+import { BiInjection } from "react-icons/bi";
 
 const Delete = () => {
-  const { dispatch, data, searchTerm, error } = usePharma()
+  const [data, setData] = useState([])
+  const [error, setError] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
       (snapshot) => {
         if (snapshot.empty) {
-          dispatch({ type: "setError", payload: "No data available" })
+          setError("No data available")
         } else {
           const dataArray = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
           }))
-          dispatch({ type: "setData", payload: dataArray })
+          setData(dataArray)
         }
       },
-      (err) => dispatch({ type: "setError", payload: err.message })
+      (err) => setError(err.message)
     )
 
     return unsubscribe
-  }, [dispatch])
+  }, [])
 
   const deleteMedicine = (id) => {
     projectFirestore.collection("ampularium").doc(id).delete()
     // Aktualizácia dát po zmazaní
-    dispatch({
-      type: "setData",
-      payload: data.filter((item) => item.id !== id),
-    })
+    setData(data.filter((item) => item.id !== id))
   }
 
   const filteredData = searchTerm
@@ -54,9 +52,7 @@ const Delete = () => {
           className="delete-search-input"
           type="text"
           value={searchTerm}
-          onChange={(e) =>
-            dispatch({ type: "setSearchTerm", payload: e.target.value })
-          }
+          onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Hladat"
         />
       </form>
@@ -75,9 +71,7 @@ const Delete = () => {
         <p>Nenašli sa žiadne výsledky</p>
       )}
 
-      <Link className="delete-back-link" to="/">
-        Spat do ampularia <BiInjection />
-      </Link>
+      <Link className="delete-back-link" to="/">Spat do ampularia <BiInjection /></Link>
     </section>
   )
 }

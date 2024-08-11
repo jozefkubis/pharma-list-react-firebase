@@ -1,18 +1,43 @@
 import "./Home.css"
+import { projectFirestore } from "../firebase/config"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { GoSearch } from "react-icons/go"
 import { MdOutlineDoubleArrow } from "react-icons/md"
-import { usePharma } from "../contexts/PharmaContext"
 
 const Home = () => {
-  const {
-    addSearch,
-    searchTerm,
-    handleSearchChange,
-    error,
-    filteredData,
-    removeSearch,
-  } = usePharma()
+  const [data, setData] = useState([])
+  const [error, setError] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+
+  useEffect(() => {
+    return projectFirestore.collection("ampularium").onSnapshot(
+      (snapshot) => {
+        setError(snapshot.empty ? "No data available" : "")
+        setData(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+      },
+      (err) => setError(err.message)
+    )
+  }, [])
+
+  const addSearch = () => {
+    document.querySelector(".home-h1").classList.add("hidden")
+    document.querySelector(".home-data").classList.add("data-toggle")
+  }
+
+  const removeSearch = () => {
+    document.querySelector(".home-h1").classList.remove("hidden")
+    document.querySelector(".home-data").classList.remove("data-toggle")
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value)
+    addSearch()
+  }
+
+  const filteredData = data.filter((oneMed) =>
+    oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <section className="home-section">
