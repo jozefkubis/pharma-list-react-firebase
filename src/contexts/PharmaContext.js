@@ -5,6 +5,7 @@ const PharmaContext = createContext()
 
 const initialState = {
   data: [],
+  dataOneMed: {},
   error: "",
   searchTerm: "",
   skupina: "",
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "setData":
       return { ...state, data: action.payload }
+    case "setDataOneMed":
+      return { ...state, dataOneMed: action.payload }
     case "setError":
       return { ...state, error: action.payload }
     case "setSearchTerm":
@@ -54,6 +57,7 @@ function PharmaProvider({ children }) {
   const [
     {
       data,
+      dataOneMed,
       error,
       searchTerm,
       skupina,
@@ -99,16 +103,15 @@ function PharmaProvider({ children }) {
     dispatch({ type: "setSearchTerm", payload: e.target.value })
   }
 
-  const filteredData = Array.isArray(data)
-    ? data.filter((oneMed) =>
-        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : data
+  const filteredData = data.filter((oneMed) =>
+    oneMed.nazov?.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <PharmaContext.Provider
       value={{
         data,
+        dataOneMed,
         error,
         searchTerm,
         handleSearchChange,
