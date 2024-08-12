@@ -74,20 +74,23 @@ function PharmaProvider({ children }) {
   ] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    return projectFirestore.collection("ampularium").onSnapshot(
+    const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
       (snapshot) => {
-        dispatch({
-          type: "setError",
-          payload: snapshot.empty ? "No data available" : "",
-        })
-        dispatch({
-          type: "setData",
-          payload: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
-        })
+        if (snapshot.empty) {
+          dispatch({ type: "setError", payload: "No data available" })
+        } else {
+          const dataArray = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          dispatch({ type: "setData", payload: dataArray })
+        }
       },
       (err) => dispatch({ type: "setError", payload: err.message })
     )
-  }, [])
+
+    return unsubscribe
+  }, [dispatch])
 
   const addSearch = () => {
     document.querySelector(".home-h1").classList.add("hidden")

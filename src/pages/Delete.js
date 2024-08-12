@@ -31,7 +31,6 @@ const Delete = () => {
 
   const deleteMedicine = (id) => {
     projectFirestore.collection("ampularium").doc(id).delete()
-    // Aktualizácia dát po zmazaní
     dispatch({
       type: "setData",
       payload: data.filter((item) => item.id !== id),

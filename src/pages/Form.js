@@ -34,15 +34,20 @@ const Form = () => {
 
     try {
       await projectFirestore.collection("ampularium").add(newMedicine)
-      dispatch({ type: "setNazov", payload: "" })
-      dispatch({ type: "setSkupina", payload: "" })
-      dispatch({ type: "setIndikacie", payload: "" })
-      dispatch({ type: "setSposobPodania", payload: "" })
-      dispatch({ type: "setDavkovanie", payload: "" })
-      dispatch({ type: "setNastupAodoznenieUcinku", payload: "" })
-      dispatch({ type: "setMU", payload: "" })
-      dispatch({ type: "setNU", payload: "" })
-      dispatch({ type: "setKI", payload: "" })
+
+      const fieldsToReset = [
+        "setNazov",
+        "setSkupina",
+        "setIndikacie",
+        "setSposobPodania",
+        "setDavkovanie",
+        "setNastupAodoznenieUcinku",
+        "setMU",
+        "setNU",
+        "setKI",
+      ]
+
+      fieldsToReset.forEach((field) => dispatch({ type: field, payload: "" }))
     } catch (error) {
       console.log(error)
     }
