@@ -8,6 +8,7 @@ const initialState = {
   error: "",
   searchTerm: "",
   skupina: "",
+  nazov: "",
   indikacie: "",
   sposobPodania: "",
   davkovanie: "",
@@ -25,6 +26,8 @@ const reducer = (state, action) => {
       return { ...state, error: action.payload }
     case "setSearchTerm":
       return { ...state, searchTerm: action.payload }
+    case "setNazov":
+      return { ...state, nazov: action.payload }
     case "setSkupina":
       return { ...state, skupina: action.payload }
     case "setIndikacie":
@@ -55,6 +58,7 @@ function PharmaProvider({ children }) {
       searchTerm,
       skupina,
       indikacie,
+      nazov,
       sposobPodania,
       davkovanie,
       nastupAodoznenieUcinku,
@@ -111,6 +115,7 @@ function PharmaProvider({ children }) {
         removeSearch,
         filteredData,
         skupina,
+        nazov,
         indikacie,
         sposobPodania,
         davkovanie,
