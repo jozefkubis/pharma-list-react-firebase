@@ -10,8 +10,8 @@ const Home = () => {
     searchTerm,
     handleSearchChange,
     error,
-    filteredData,
     removeSearch,
+    sortFilteredData,
   } = usePharma()
 
   return (
@@ -33,8 +33,8 @@ const Home = () => {
       </div>
       <div className="home-data">
         {error && <p>{error}</p>}
-        {filteredData.length ? (
-          filteredData.map(({ id, nazov, skupina }) => (
+        {sortFilteredData.length ? (
+          sortFilteredData.map(({ id, nazov, skupina }) => (
             <div className="medicine" key={id}>
               <div className="separator">
                 <h4>{nazov}</h4>

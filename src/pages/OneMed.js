@@ -21,7 +21,6 @@ const OneMed = () => {
         } else {
           dispatch({ type: "setDataOneMed", payload: doc.data() })
         }
-        // console.log(dataOneMed)
       })
   }, [medId, dispatch])
 

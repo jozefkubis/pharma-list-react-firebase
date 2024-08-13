@@ -106,9 +106,21 @@ function PharmaProvider({ children }) {
     dispatch({ type: "setSearchTerm", payload: e.target.value })
   }
 
-  const filteredData = data.filter((oneMed) =>
-    oneMed.nazov?.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredData = searchTerm
+    ? data.filter((oneMed) =>
+        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : data
+
+  const sortFilteredData = filteredData.sort((a, b) => {
+    if (a.nazov < b.nazov) {
+      return -1
+    }
+    if (a.nazov > b.nazov) {
+      return 1
+    }
+    return 0
+  })
 
   return (
     <PharmaContext.Provider
@@ -119,7 +131,7 @@ function PharmaProvider({ children }) {
         searchTerm,
         handleSearchChange,
         removeSearch,
-        filteredData,
+        sortFilteredData,
         skupina,
         nazov,
         indikacie,

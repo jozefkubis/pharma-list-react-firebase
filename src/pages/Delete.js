@@ -1,6 +1,5 @@
 import "./Delete.css"
 import { projectFirestore } from "../firebase/config"
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { GoSearch } from "react-icons/go"
 import { RiDeleteBin2Fill } from "react-icons/ri"
@@ -8,26 +7,7 @@ import { BiInjection } from "react-icons/bi"
 import { usePharma } from "../contexts/PharmaContext"
 
 const Delete = () => {
-  const { dispatch, data, searchTerm, error } = usePharma()
-
-  useEffect(() => {
-    const unsubscribe = projectFirestore.collection("ampularium").onSnapshot(
-      (snapshot) => {
-        if (snapshot.empty) {
-          dispatch({ type: "setError", payload: "No data available" })
-        } else {
-          const dataArray = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          dispatch({ type: "setData", payload: dataArray })
-        }
-      },
-      (err) => dispatch({ type: "setError", payload: err.message })
-    )
-
-    return unsubscribe
-  }, [dispatch])
+  const { dispatch, data, searchTerm, error, sortFilteredData } = usePharma()
 
   const deleteMedicine = (id) => {
     projectFirestore.collection("ampularium").doc(id).delete()
@@ -36,12 +16,6 @@ const Delete = () => {
       payload: data.filter((item) => item.id !== id),
     })
   }
-
-  const filteredData = searchTerm
-    ? data.filter((oneMed) =>
-        oneMed.nazov.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : data
 
   return (
     <section className="delete-section">
@@ -61,8 +35,8 @@ const Delete = () => {
       </form>
 
       {error && <p>{error}</p>}
-      {filteredData.length > 0 ? (
-        filteredData.map(({ id, nazov }) => (
+      {sortFilteredData.length > 0 ? (
+        sortFilteredData.map(({ id, nazov }) => (
           <div className="medicine" key={id}>
             <h4>{nazov}</h4>
             <div className="kos" onClick={() => deleteMedicine(id)}>
